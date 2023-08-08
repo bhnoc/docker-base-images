@@ -1,0 +1,20 @@
+services:
+ dbarchive:
+    container_name: vaultdb
+    image: "percona/percona-server:8.0"
+    environment:
+      ENVIRONMENT: "local"
+      MYSQL_ROOT_PASSWORD: "password"
+    networks:
+       bhnoc:
+         aliases:
+          - "vaultdb.bhnoc.org"
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/lib/mysql
+networks:
+  bhnoc:
+    external: true
+    name: bhnoc
+    driver: bridge
