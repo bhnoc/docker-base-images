@@ -1,14 +1,17 @@
 #note: these files must remain with Unix line endings
-FROM rockylinux:latest
+FROM ghcr.io/bhnoc/rocky9:latest
 
 EXPOSE 80
 EXPOSE 443
 
 VOLUME ["/var/www/config","/var/www/letencrypt"]
 
-RUN dnf install -y  http://rpms.remirepo.net/enterprise/remi-release-8.rpm
-RUN dnf module -y enable php:remi-8.0
-RUN dnf -y install php php-pecl-apcu php-bcmath php-soap php-mbstring php-mysqlnd php-devel php-json php-pear php-pecl-ssh2 php-pecl-rdkafka5 php-pecl-redis5 php-pecl-mongodb php74-php-pecl-gnupg php-intl
+RUN dnf -y install epel-release && dnf -y install http://rpms.remirepo.net/enterprise/remi-release-9.rpm
+RUN dnf -y install dnf-utils
+RUN dnf -y module reset php
+RUN dnf -y module install php:remi-8.2
+RUN dnf update
+RUN dnf -y install php php-cli php-gd php-mysqlnd php-mbstring php-json php-common php-dba php-dbg php-devel php-embedded php-enchant php-bcmath php-gmp php-intl php-ldap php-odbc php-pdo php-opcache php-pear php-pgsql php-process php-snmp php-soap php-xml php-opcache
 
 RUN dnf install -y httpd perl-DBD-MySQL git make zip unzip mod_ssl
 

@@ -5,8 +5,6 @@ FROM ghcr.io/bhnoc/rocky9:latest
 RUN dnf -y update && \
         dnf -y install findutils python3.11
 
-RUN mkdir -p /build/
-WORKDIR /build/Python-3.10.0/
 WORKDIR /opt/env/
 RUN python3.11 -m venv live
 RUN source live/bin/activate && pip install --upgrade pip
