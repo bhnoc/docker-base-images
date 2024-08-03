@@ -1,3 +1,6 @@
+# Project Directories.
+docker/vault/app/vault_config.yaml
+
 configs
 .DS_Store
 *~
